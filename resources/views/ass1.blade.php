@@ -62,8 +62,19 @@
                 method:"GET",
                 success:function(data)
                 {
+                  console.log(data);
+                  hold = '<div>Name: ' + data.name +'</div>'+'<div>Weight: ' +data.weight +'</div>'+'<div>Type: ';
+
+                  for(var i = 0; i < data.types.length; i++){
+                    hold += data.types[i].type.name + ' ';
+                  }
+                  hold +='</div>';
                   hold += "<img src='"+data.sprites.front_default+"' alt='"+data.name+"'>";
+
+                  //hold = '</div>';
                   $("#info").html(hold);
+                },error(message){
+                  console.log("Error: ");
                 }
            });
 
