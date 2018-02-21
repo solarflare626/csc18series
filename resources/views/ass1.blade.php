@@ -1,7 +1,7 @@
 @extends('shared.master')
 
 @section('title')
-	Assignment 1
+  Assignment 1
 @endsection
 
 @section('header')
@@ -14,8 +14,8 @@
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <style type="text/css">
-	
-	.add-on .input-group-btn > .btn {
+  
+  .add-on .input-group-btn > .btn {
   border-left-width:0;left:-2px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -39,12 +39,12 @@
       <input class="form-control" placeholder="Search" name="srch-term" id="srch-pokemon" type="number">
       <div class="input-group-btn">
         <button class="btn btn-default" onclick="btnClick()"><i class="glyphicon glyphicon-search"></i></button>
-      </div>	
+      </div>  
     </div>
-
+<!--hello --> 
 
     <div id="info">
-    	
+      
     </div>
  
 </div>
@@ -52,22 +52,33 @@
 
 <script type="text/javascript">
 
-	function btnClick(){
+  function btnClick(){
 
-	var pokeid =document.getElementById("srch-pokemon").value;
-	console.log(pokeid);
-	var hold = "";
-	$.ajax({
+  var pokeid =document.getElementById("srch-pokemon").value;
+  console.log(pokeid);
+  var hold = "";
+  $.ajax({
               url:"https://www.pokeapi.co/api/v2/pokemon/"+pokeid,
                 method:"GET",
                 success:function(data)
                 {
+                  console.log(data);
+                  hold = '<div>Name: ' + data.name +'</div>'+'<div>Weight: ' +data.weight +'</div>'+'<div>Type: ';
+
+                  for(var i = 0; i < data.types.length; i++){
+                    hold += data.types[i].type.name + ' ';
+                  }
+                  hold +='</div>';
                   hold += "<img src='"+data.sprites.front_default+"' alt='"+data.name+"'>";
+
+                  //hold = '</div>';
                   $("#info").html(hold);
+                },error(message){
+                  console.log("Error: ");
                 }
            });
 
-	
+  
 
 }
 </script>
