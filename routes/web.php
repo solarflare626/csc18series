@@ -20,3 +20,16 @@ Route::get('/ass1', function () {
 Route::get('/ass2', function () {
     return view('welcome');
 });
+Route::get('api/users', 'UserController@get');
+
+
+Route::get('api/users/{id}', 'UserController@getspecific');
+Route::put('api/users', 'UserController@store');
+
+Route::post('api/users', 'UserController@store');
+Route::delete('api/users/{username}', 'UserController@delete');
+
+Route::delete('api/users', 'UserController@delete');
+
+
+
